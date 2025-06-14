@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>নুরুল কুরআন কওমি মাদ্রাসা</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'SolaimanLipi', Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 100%;
+            padding: 10px;
+        }
+        .header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .btn-madrasa {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 12px;
+            font-size: 16px;
+            text-align: left;
+            background-color: #3498db;
+            color: white;
+            border: none;
+        }
+        .btn-madrasa:hover {
+            background-color: #2980b9;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .back-btn {
+            margin-bottom: 15px;
+        }
+        .student-list {
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .student-item {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+            text-align: left;
+        }
+        .student-item:last-child {
+            border-bottom: none;
+        }
+        .search-box {
+            margin-bottom: 15px;
+        }
+        .paid-badge {
+            background-color: #2ecc71;
+        }
+        .unpaid-badge {
+            background-color: #e74c3c;
+        }
+        .tab-buttons {
+            display: flex;
+            margin-bottom: 15px;
+            overflow-x: auto;
+        }
+        .tab-btn {
+            flex: 1;
+            min-width: 100px;
+            margin: 0 5px;
+        }
+        @media (max-width: 768px) {
+            .btn-madrasa {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Home Page -->
+        <div id="home-page">
+            <div class="header">
+                <h2>নুরুল কুরআন কওমি মাদ্রাসা</h2>
+            </div>
+            
+            <button class="btn btn-madrasa" onclick="showPage('shishu-page')">শিশু জামাত</button>
+            <button class="btn btn-madrasa" onclick="showPage('first-page')">প্রথম জামাত</button>
+            <button class="btn btn-madrasa" onclick="showPage('second-page')">দ্বিতীয় জামাত</button>
+            <button class="btn btn-madrasa" onclick="showPage('third-page')">তৃতীয় জামাত</button>
+            <button class="btn btn-madrasa" onclick="showPage('hifz-page')">হিফজ বিভাগ</button>
+            <button class="btn btn-madrasa" onclick="showPage('add-student-page')">ছাত্র যোগ করুন</button>
+            <button class="btn btn-madrasa" onclick="showPage('fee-page')">বেতন দিন</button>
+            <button class="btn btn-madrasa" onclick="showPage('unpaid-page')">বকেয়া ছাত্র</button>
+            <button class="btn btn-madrasa" onclick="showPage('today-fee-page')">আজকের বেতন</button>
+            <button class="btn btn-madrasa" onclick="window.open('https://madrasa-website.com', '_blank')">মাদ্রাসার ওয়েবসাইট</button>
+        </div>
+
+        <!-- Add Student Page -->
+        <div id="add-student-page" class="d-none">
+            <button class="btn btn-secondary back-btn" onclick="showPage('home-page')">← Back</button>
+            <div class="header">
+                <h3>নতুন ছাত্র যোগ করুন</h3>
+            </div>
+            <div class="form-container">
+                <form id="add-student-form">
+                    <div class="mb-3">
+                        <label for="student-class" class="form-label">ক্লাস নির্ণয় করুন</label>
+                        <select class="form-select" id="student-class" required>
+                            <option value="">-- নির্বাচন করুন --</option>
+                            <option value="shishu">শিশু জামাত</option>
+                            <option value="first">প্রথম জামাত</option>
+                            <option value="second">দ্বিতীয় জামাত</option>
+                            <option value="third">তৃতীয় জামাত</option>
+                            <option value="hifz">হিফজ বিভাগ</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="student-name" class="form-label">নাম</label>
+                        <input type="text" class="form-control" id="student-name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="father-name" class="form-label">পিতার নাম</label>
+                        <input type="text" class="form-control" id="father-name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="mother-name" class="form-label">মাতার নাম (ঐচ্ছিক)</label>
+                        <input type="text" class="form-control" id="mother-name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="mobile-number" class="form-label">মোবাইল নাম্বার</label>
+                        <input type="tel" class="form-control" id="mobile-number" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">সাবমিট</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Class Pages -->
+        <div id="shishu-page" class="d-none">
+            <button class="btn btn-secondary back-btn" onclick="showPage('home-page')">← Back</button>
+            <div class="header">
+                <h3>শিশু জামাত</h3>
+            </div>
+            <div class="student-list" id="shishu-list">
+                <div class="text-center">লোড হচ্ছে...</div>
+            </div>
+        </div>
+
+        <div id="first-page" class="d-none">
+            <button class="btn btn-secondary back-btn" onclick="showPage('home-page')">← Back</button>
+            <div class="header">
+                <h3>প্রথম জামাত</h3>
+            </div>
+            <div class="student-list" id="first-list">
+                <div class="text-center">লোড হচ্ছে...</div>
+            </div>
+        </div>
+
+        <div id="second-page" class="d-none">
+            <button class="btn btn-secondary back-btn" onclick="showPage('home-page')">← Back</button>
+            <div class="header">
+                <h3>দ্বিতীয় জামাত</h3>
+            </div>
+            <div class="student-list" id="second-list">
+                <div class="text-center">লোড হচ্ছে...</div>
+            </div>
+        </div>
+
+        <div id="third-page" class="d-none">
+            <button class="btn btn-secondary back-btn" onclick="showPage('home-page')">← Back</button>
+            <div class="header">
+                <h3>তৃতীয় জামাত</h3>
+            </div>
+            <div class="student-list" id="third-list">
+                <div class="text-center">লোড হচ্ছে...</div>
+            </div>
+        </div>
+
+        <div id="hifz-page" class="d-none">
+            <button class="btn btn-secondary back-btn" onclick="showPage('home-page')">← Back</button>
+            <div class="header">
+                <h3>হিফজ বিভাগ</h3>
+            </div>
+            <div class="student-list" id="hifz-list">
+                <div class="text-center">লোড হচ্ছে...</div>
+            </div>
+        </div>
+
+        <!-- Fee Management Page -->
+        <div id="fee-page" class="d-none">
+            <button class="btn btn-secondary back-btn" onclick="showPage('home-page')">← Back</button>
+            <div class="header">
+                <h3>বেতন প্রদান</h3>
+            </div>
+            <div class="form-container">
+                <form id="fee-form">
+                    <div class="mb-3">
+                        <label for="fee-class" class="form-label">ক্লাস নির্বাচন করুন</label>
+                        <select class="form-select" id="fee-class" required onchange="loadStudentsForFee()">
+                            <option value="">-- নির্বাচন করুন --</option>
+                            <option value="shishu">শিশু জামাত</option>
+                            <option value="first">প্রথম জামাত</option>
+                            <option value="second">দ্বিতীয় জামাত</option>
+                            <option value="third">তৃতীয় জামাত</option>
+                            <option value="hifz">হিফজ বিভাগ</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="student-select" class="form-label">ছাত্র নির্বাচন করুন</label>
+                        <input type="text" class="form-control" id="student-search" placeholder="ছাত্রের নাম লিখুন..." oninput="filterStudents()">
+                        <select class="form-select mt-2" id="student-select" size="5" required onchange="loadStudentFeeDetails()">
+                            <!-- Student options will be loaded here -->
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="total-fee" class="form-label">মোট বেতন</label>
+                        <input type="number" class="form-control" id="total-fee" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="paid-amount" class="form-label">প্রদানকৃত বেতন</label>
+                        <input type="number" class="form-control" id="paid-amount" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="due-amount" class="form-label">বকেয়া বেতন</label>
+                        <input type="number" class="form-control" id="due-amount" readonly>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">সাবমিট</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Unpaid Students Page -->
+        <div id="unpaid-page" class="d-none">
+            <button class="btn btn-secondary back-btn" onclick="showPage('home-page')">← Back</button>
+            <div class="header">
+                <h3>বকেয়া ছাত্রদের তালিকা</h3>
+            </div>
+            <div class="tab-buttons">
+                <button class="btn btn-primary tab-btn" onclick="showUnpaidTab('shishu')">শিশু</button>
+                <button class="btn btn-primary tab-btn" onclick="showUnpaidTab('first')">প্রথম</button>
+                <button class="btn btn-primary tab-btn" onclick="showUnpaidTab('second')">দ্বিতীয়</button>
+                <button class="btn btn-primary tab-btn" onclick="showUnpaidTab('third')">তৃতীয়</button>
+                <button class="btn btn-primary tab-btn" onclick="showUnpaidTab('hifz')">হিফজ</button>
+            </div>
+            <div class="student-list" id="unpaid-list">
+                <div class="text-center">ক্লাস নির্বাচন করুন</div>
+            </div>
+            <button class="btn btn-success w-100 mt-3 d-none" id="download-unpaid-btn" onclick="downloadUnpaidList()">ডাউনলোড করুন</button>
+        </div>
+
+        <!-- Today's Fee Page -->
+        <div id="today-fee-page" class="d-none">
+            <button class="btn btn-secondary back-btn" onclick="showPage('home-page')">← Back</button>
+            <div class="header">
+                <h3>আজকে যারা বেতন দিয়েছেন</h3>
+            </div>
+            <div class="tab-buttons">
+                <button class="btn btn-primary tab-btn" onclick="showTodayFeeTab('shishu')">শিশু</button>
+                <button class="btn btn-primary tab-btn" onclick="showTodayFeeTab('first')">প্রথম</button>
+                <button class="btn btn-primary tab-btn" onclick="showTodayFeeTab('second')">দ্বিতীয়</button>
+                <button class="btn btn-primary tab-btn" onclick="showTodayFeeTab('third')">তৃতীয়</button>
+                <button class="btn btn-primary tab-btn" onclick="showTodayFeeTab('hifz')">হিফজ</button>
+            </div>
+            <div class="student-list" id="today-fee-list">
+                <div class="text-center">ক্লাস নির্বাচন করুন</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Google Sheet API URL (আপনার দেওয়া URL টি ব্যবহার করা হয়েছে)
+        const API_URL = "https://script.google.com/macros/s/AKfycbzsE7LmXsoSgKG6yKElt8IZXTXBrliAH49f9eSZM7ZZYueL2-1o5IA36TGimCHUYgPQ9Q/exec";
+        
+        // Monthly fee amounts for each class
+        const FEE_AMOUNTS = {
+            shishu: 150,
+            first: 200,
+            second: 250,
+            third: 300,
+            hifz: 600
+        };
+        
+        // Current active unpaid tab
+        let currentUnpaidTab = '';
+        let currentTodayFeeTab = '';
+        
+        // Show specific page and hide others
+        function showPage(pageId) {
+            console.log("Showing page:", pageId);
+            document.querySelectorAll('[id$="-page"]').forEach(page => {
+                page.classList.add('d-none');
+            });
+            document.getElementById(pageId).classList.remove('d-none');
+            
+            // Load data when specific pages are shown
+            if (pageId === 'shishu-page') loadClassStudents('shishu');
+            if (pageId === 'first-page') loadClassStudents('first');
+            if (pageId === 'second-page') loadClassStudents('second');
+            if (pageId === 'third-page') loadClassStudents('third');
+            if (pageId === 'hifz-page') loadClassStudents('hifz');
+            if (pageId === 'unpaid-page') showUnpaidTab('shishu');
+            if (pageId === 'today-fee-page') showTodayFeeTab('shishu');
+            
+            // Scroll to top when changing pages
+            window.scrollTo(0, 0);
+        }
+        
+        // Add Student Form Submission
+        document.getElementById('add-student-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const studentClass = document.getElementById('student-class').value;
+            const name = document.getElementById('student-name').value;
+            const fatherName = document.getElementById('father-name').value;
+            const motherName = document.getElementById('mother-name').value;
+            const mobile = document.getElementById('mobile-number').value;
+            
+            const studentData = {
+                class: studentClass,
+                name: name,
+                fatherName: fatherName,
+                motherName: motherName,
+                mobile: mobile,
+                totalFee: 0,
+                paidFee: 0,
+                dueFee: 0,
+                joinDate: new Date().toISOString().split('T')[0]
+            };
+            
+            if (navigator.onLine) {
+                // Online - send to Google Sheet
+                addStudentToSheet(studentData);
+            } else {
+                // Offline - save to localStorage
+                saveStudentOffline(studentData);
+                alert('অফলাইন অবস্থায় ডাটা সংরক্ষিত হয়েছে। ইন্টারনেট সংযোগ পেলে অটোমেটিকভাবে গুগল শীটে যাবে।');
+                this.reset();
+                showPage('home-page');
+            }
+        });
+        
+        // Add student to Google Sheet
+        function addStudentToSheet(studentData) {
+            fetch(`${API_URL}?action=addStudent`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(studentData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('ছাত্র সফলভাবে যোগ হয়েছে!');
+                    document.getElementById('add-student-form').reset();
+                    showPage('home-page');
+                    
+                    // Sync any offline data
+                    syncOfflineData();
+                } else {
+                    alert('ত্রুটি: ' + data.message);
+                }
+            })
+            .catch(error => {
+                // Save to offline if online submission fails
+                saveStudentOffline(studentData);
+                alert('অফলাইন অবস্থায় ডাটা সংরক্ষিত হয়েছে। ইন্টারনেট সংযোগ পেলে অটোমেটিকভাবে গুগল শীটে যাবে।');
+                document.getElementById('add-student-form').reset();
+                showPage('home-page');
+            });
+        }
+        
+        // Save student data to localStorage when offline
+        function saveStudentOffline(studentData) {
+            let offlineStudents = JSON.parse(localStorage.getItem('offlineStudents') || '[]');
+            offlineStudents.push(studentData);
+            localStorage.setItem('offlineStudents', JSON.stringify(offlineStudents));
+        }
+        
+        // Sync offline data when coming online
+        function syncOfflineData() {
+            if (!navigator.onLine) return;
+            
+            let offlineStudents = JSON.parse(localStorage.getItem('offlineStudents') || '[]');
+            if (offlineStudents.length === 0) return;
+            
+            // Try to send all offline students
+            const failedSubmissions = [];
+            
+            offlineStudents.forEach(student => {
+                fetch(`${API_URL}?action=addStudent`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(student)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.success) {
+                        failedSubmissions.push(student);
+                    }
+                })
+                .catch(() => {
+                    failedSubmissions.push(student);
+                });
+            });
+            
+            // Update localStorage with any failed submissions
+            localStorage.setItem('offlineStudents', JSON.stringify(failedSubmissions));
+            
+            if (failedSubmissions.length === 0) {
+                console.log('All offline data synced successfully');
+            } else {
+                console.log('Some offline data failed to sync and will retry later');
+            }
+        }
+        
+        // Load students for a specific class
+        function loadClassStudents(className) {
+            const listElement = document.getElementById(`${className}-list`);
+            listElement.innerHTML = '<div class="text-center">লোড হচ্ছে...</div>';
+            
+            fetch(`${API_URL}?action=getStudents&class=${className}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.students) {
+                    renderStudentList(className, data.students);
+                } else {
+                    listElement.innerHTML = '<div class="text-center text-danger">ডাটা লোড করতে সমস্যা হয়েছে</div>';
+                }
+            })
+            .catch(error => {
+                listElement.innerHTML = '<div class="text-center text-danger">অফলাইন অবস্থা - ডাটা লোড করতে পারেনি</div>';
+            });
+        }
+        
+        // Render student list for a class
+        function renderStudentList(className, students) {
+            const listElement = document.getElementById(`${className}-list`);
+            listElement.innerHTML = '';
+            
+            if (students.length === 0) {
+                listElement.innerHTML = '<div class="text-center">কোন ছাত্র পাওয়া যায়নি</div>';
+                return;
+            }
+            
+            students.forEach((student, index) => {
+                const studentItem = document.createElement('div');
+                studentItem.className = 'student-item';
+                
+                const dueMonths = Math.ceil(student.dueFee / FEE_AMOUNTS[className]);
+                const paidMonths = Math.floor(student.paidFee / FEE_AMOUNTS[className]);
+                
+                studentItem.innerHTML = `
+                    <h5>${student.name}</h5>
+                    <p>পিতার নাম: ${student.fatherName}</p>
+                    <p>মোবাইল: <a href="tel:${student.mobile}">${student.mobile}</a></p>
+                    <div class="d-flex justify-content-between">
+                        <span class="badge bg-success">প্রদান: ${paidMonths} মাস</span>
+                        <span class="badge bg-danger">বকেয়া: ${dueMonths} মাস (${student.dueFee} টাকা)</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-2">
+                        <button class="btn btn-sm btn-warning" onclick="editStudent('${className}', ${index})">Edit</button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteStudent('${className}', '${student.id}')">Delete</button>
+                        <button class="btn btn-sm btn-primary" onclick="payFeeForStudent('${className}', '${student.id}', '${student.name}', '${student.fatherName}', ${student.totalFee}, ${student.paidFee}, ${student.dueFee})">Fee</button>
+                    </div>
+                `;
+                
+                listElement.appendChild(studentItem);
+            });
+        }
+        
+        // Load students for fee payment dropdown
+        function loadStudentsForFee() {
+            const className = document.getElementById('fee-class').value;
+            if (!className) return;
+            
+            const studentSelect = document.getElementById('student-select');
+            studentSelect.innerHTML = '<option>লোড হচ্ছে...</option>';
+            
+            fetch(`${API_URL}?action=getStudents&class=${className}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.students) {
+                    studentSelect.innerHTML = '';
+                    data.students.forEach(student => {
+                        const option = document.createElement('option');
+                        option.value = student.id;
+                        option.textContent = `${student.name} (${student.fatherName}) - বকেয়া: ${student.dueFee} টাকা`;
+                        studentSelect.appendChild(option);
+                    });
+                } else {
+                    studentSelect.innerHTML = '<option>ডাটা লোড করতে সমস্যা হয়েছে</option>';
+                }
+            })
+            .catch(error => {
+                studentSelect.innerHTML = '<option>অফলাইন অবস্থা - ডাটা লোড করতে পারেনি</option>';
+            });
+        }
+        
+        // Filter students in fee payment dropdown
+        function filterStudents() {
+            const searchText = document.getElementById('student-search').value.toLowerCase();
+            const options = document.getElementById('student-select').options;
+            
+            for (let i = 0; i < options.length; i++) {
+                const option = options[i];
+                if (option.textContent.toLowerCase().includes(searchText)) {
+                    option.style.display = '';
+                } else {
+                    option.style.display = 'none';
+                }
+            }
+        }
+        
+        // Load student fee details when selected
+        function loadStudentFeeDetails() {
+            const className = document.getElementById('fee-class').value;
+            const studentId = document.getElementById('student-select').value;
+            
+            if (!className || !studentId) return;
+            
+            fetch(`${API_URL}?action=getStudent&class=${className}&id=${studentId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.student) {
+                    const student = data.student;
+                    document.getElementById('total-fee').value = student.totalFee;
+                    document.getElementById('paid-amount').value = '';
+                    document.getElementById('due-amount').value = student.dueFee;
+                }
+            })
+            .catch(error => {
+                console.error('Error loading student details:', error);
+            });
+        }
+        
+        // Fee Form Submission
+        document.getElementById('fee-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const className = document.getElementById('fee-class').value;
+            const studentId = document.getElementById('student-select').value;
+            const paidAmount = parseFloat(document.getElementById('paid-amount').value);
+            
+            if (!className || !studentId || isNaN(paidAmount)) {
+                alert('সব প্রয়োজনীয় তথ্য প্রদান করুন');
+                return;
+            }
+            
+            const feeData = {
+                class: className,
+                studentId: studentId,
+                paidAmount: paidAmount,
+                paymentDate: new Date().toISOString().split('T')[0]
+            };
+            
+            if (navigator.onLine) {
+                // Online - send to Google Sheet
+                submitFeePayment(feeData);
+            } else {
+                // Offline - save to localStorage
+                saveFeePaymentOffline(feeData);
+                alert('অফলাইন অবস্থায় ডাটা সংরক্ষিত হয়েছে। ইন্টারনেট সংযোগ পেলে অটোমেটিকভাবে গুগল শীটে যাবে।');
+                this.reset();
+                showPage('home-page');
+            }
+        });
+        
+        // Submit fee payment to Google Sheet
+        function submitFeePayment(feeData) {
+            fetch(`${API_URL}?action=submitFee`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(feeData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('বেতন সফলভাবে জমা হয়েছে!');
+                    document.getElementById('fee-form').reset();
+                    showPage('home-page');
+                    
+                    // Sync any offline fee payments
+                    syncOfflineFeePayments();
+                } else {
+                    alert('ত্রুটি: ' + data.message);
+                }
+            })
+            .catch(error => {
+                // Save to offline if online submission fails
+                saveFeePaymentOffline(feeData);
+                alert('অফলাইন অবস্থায় ডাটা সংরক্ষিত হয়েছে। ইন্টারনেট সংযোগ পেলে অটোমেটিকভাবে গুগল শীটে যাবে।');
+                document.getElementById('fee-form').reset();
+                showPage('home-page');
+            });
+        }
+        
+        // Save fee payment to localStorage when offline
+        function saveFeePaymentOffline(feeData) {
+            let offlinePayments = JSON.parse(localStorage.getItem('offlineFeePayments') || '[]');
+            offlinePayments.push(feeData);
+            localStorage.setItem('offlineFeePayments', JSON.stringify(offlinePayments));
+        }
+        
+        // Sync offline fee payments when coming online
+        function syncOfflineFeePayments() {
+            if (!navigator.onLine) return;
+            
+            let offlinePayments = JSON.parse(localStorage.getItem('offlineFeePayments') || '[]');
+            if (offlinePayments.length === 0) return;
+            
+            // Try to send all offline payments
+            const failedSubmissions = [];
+            
+            offlinePayments.forEach(payment => {
+                fetch(`${API_URL}?action=submitFee`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payment)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.success) {
+                        failedSubmissions.push(payment);
+                    }
+                })
+                .catch(() => {
+                    failedSubmissions.push(payment);
+                });
+            });
+            
+            // Update localStorage with any failed submissions
+            localStorage.setItem('offlineFeePayments', JSON.stringify(failedSubmissions));
+            
+            if (failedSubmissions.length === 0) {
+                console.log('All offline fee payments synced successfully');
+            } else {
+                console.log('Some offline fee payments failed to sync and will retry later');
+            }
+        }
+        
+        // Show unpaid students tab
+        function showUnpaidTab(className) {
+            currentUnpaidTab = className;
+            const listElement = document.getElementById('unpaid-list');
+            listElement.innerHTML = '<div class="text-center">লোড হচ্ছে...</div>';
+            
+            // Show download button
+            document.getElementById('download-unpaid-btn').classList.remove('d-none');
+            
+            fetch(`${API_URL}?action=getUnpaidStudents&class=${className}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.students) {
+                    renderUnpaidList(className, data.students);
+                } else {
+                    listElement.innerHTML = '<div class="text-center text-danger">ডাটা লোড করতে সমস্যা হয়েছে</div>';
+                }
+            })
+            .catch(error => {
+                listElement.innerHTML = '<div class="text-center text-danger">অফলাইন অবস্থা - ডাটা লোড করতে পারেনি</div>';
+            });
+        }
+        
+        // Render unpaid students list
+        function renderUnpaidList(className, students) {
+            const listElement = document.getElementById('unpaid-list');
+            listElement.innerHTML = '';
+            
+            if (students.length === 0) {
+                listElement.innerHTML = '<div class="text-center">কোন বকেয়া ছাত্র পাওয়া যায়নি</div>';
+                return;
+            }
+            
+            students.forEach(student => {
+                const studentItem = document.createElement('div');
+                studentItem.className = 'student-item';
+                
+                const dueMonths = Math.ceil(student.dueFee / FEE_AMOUNTS[className]);
+                
+                studentItem.innerHTML = `
+                    <h5>${student.name}</h5>
+                    <p>পিতার নাম: ${student.fatherName}</p>
+                    <p>মোবাইল: <a href="tel:${student.mobile}">${student.mobile}</a></p>
+                    <div class="d-flex justify-content-between">
+                        <span class="badge bg-danger">বকেয়া: ${dueMonths} মাস (${student.dueFee} টাকা)</span>
+                    </div>
+                    <button class="btn btn-sm btn-primary w-100 mt-2" onclick="payFeeForStudent('${className}', '${student.id}', '${student.name}', '${student.fatherName}', ${student.totalFee}, ${student.paidFee}, ${student.dueFee})">বেতন প্রদান করুন</button>
+                `;
+                
+                listElement.appendChild(studentItem);
+            });
+        }
+        
+        // Download unpaid list as Excel
+        function downloadUnpaidList() {
+            if (!currentUnpaidTab) return;
+            
+            // In a real implementation, this would generate an Excel file
+            // For this demo, we'll just show an alert
+            alert(`Downloading unpaid list for ${currentUnpaidTab} class...`);
+            
+            // Actual implementation would use something like:
+            window.open(`${API_URL}?action=downloadUnpaid&class=${currentUnpaidTab}`, '_blank');
+        }
+        
+        // Show today's fee payments tab
+        function showTodayFeeTab(className) {
+            currentTodayFeeTab = className;
+            const listElement = document.getElementById('today-fee-list');
+            listElement.innerHTML = '<div class="text-center">লোড হচ্ছে...</div>';
+            
+            const today = new Date().toISOString().split('T')[0];
+            
+            fetch(`${API_URL}?action=getTodayFeePayments&class=${className}&date=${today}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.payments) {
+                    renderTodayFeeList(className, data.payments);
+                } else {
+                    listElement.innerHTML = '<div class="text-center text-danger">ডাটা লোড করতে সমস্যা হয়েছে</div>';
+                }
+            })
+            .catch(error => {
+                listElement.innerHTML = '<div class="text-center text-danger">অফলাইন অবস্থা - ডাটা লোড করতে পারেনি</div>';
+            });
+        }
+        
+        // Render today's fee payments list
+        function renderTodayFeeList(className, payments) {
+            const listElement = document.getElementById('today-fee-list');
+            listElement.innerHTML = '';
+            
+            if (payments.length === 0) {
+                listElement.innerHTML = '<div class="text-center">আজকে কেউ বেতন প্রদান করেনি</div>';
+                return;
+            }
+            
+            payments.forEach(payment => {
+                const paymentItem = document.createElement('div');
+                paymentItem.className = 'student-item';
+                
+                paymentItem.innerHTML = `
+                    <h5>${payment.studentName}</h5>
+                    <p>পিতার নাম: ${payment.fatherName}</p>
+                    <div class="d-flex justify-content-between">
+                        <span class="badge bg-success">প্রদান: ${payment.amount} টাকা</span>
+                        <span>তারিখ: ${payment.date}</span>
+                    </div>
+                `;
+                
+                listElement.appendChild(paymentItem);
+            });
+        }
+        
+        // Helper function to prepare fee payment for a specific student
+        function payFeeForStudent(className, studentId, studentName, fatherName, totalFee, paidFee, dueFee) {
+            showPage('fee-page');
+            
+            // Set the form values
+            document.getElementById('fee-class').value = className;
+            loadStudentsForFee();
+            
+            // Need to wait for the student list to load before we can select the student
+            setTimeout(() => {
+                const studentSelect = document.getElementById('student-select');
+                for (let i = 0; i < studentSelect.options.length; i++) {
+                    if (studentSelect.options[i].value === studentId) {
+                        studentSelect.selectedIndex = i;
+                        break;
+                    }
+                }
+                
+                document.getElementById('total-fee').value = totalFee;
+                document.getElementById('paid-amount').value = '';
+                document.getElementById('due-amount').value = dueFee;
+                
+                // Scroll to the form
+                document.getElementById('fee-form').scrollIntoView();
+            }, 500);
+        }
+        
+        // Edit student (placeholder function)
+        function editStudent(className, index) {
+            alert(`Editing student in ${className} class at index ${index}`);
+            // In a real implementation, this would open an edit form
+        }
+        
+        // Delete student
+        function deleteStudent(className, studentId) {
+            if (confirm('আপনি কি নিশ্চিত এই ছাত্রকে ডিলিট করতে চান?')) {
+                fetch(`${API_URL}?action=deleteStudent&class=${className}&id=${studentId}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('ছাত্র সফলভাবে ডিলিট হয়েছে!');
+                        loadClassStudents(className);
+                    } else {
+                        alert('ত্রুটি: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    alert('অফলাইন অবস্থা - ডিলিট করা যায়নি');
+                });
+            }
+        }
+        
+        // Check online status and sync data periodically
+        function checkOnlineStatus() {
+            if (navigator.onLine) {
+                syncOfflineData();
+                syncOfflineFeePayments();
+            }
+        }
+        
+        // Initialize the app
+        function initApp() {
+            showPage('home-page');
+            
+            // Check online status every 30 seconds
+            setInterval(checkOnlineStatus, 30000);
+            
+            // Also check when the app comes online
+            window.addEventListener('online', checkOnlineStatus);
+            
+            // Auto-scroll input fields into view when focused
+            document.querySelectorAll('input, select, textarea').forEach(input => {
+                input.addEventListener('focus', function() {
+                    setTimeout(() => {
+                        this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        document.documentElement.style.scrollPaddingBottom = '200px';
+                    }, 300);
+                });
+                
+                input.addEventListener('blur', function() {
+                    document.documentElement.style.scrollPaddingBottom = '0';
+                });
+            });
+        }
+        
+        // Start the app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
